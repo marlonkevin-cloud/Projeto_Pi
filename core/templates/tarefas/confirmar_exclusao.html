@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Confirmar Exclusão</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Exclusão{% endblock %}
+
+{% block content %}
     <h1>Excluir Tarefa</h1>
     <p>Tem certeza que deseja excluir a tarefa "<strong>{{ tarefa.titulo }}</strong>"?</p>
     
@@ -13,5 +11,4 @@
         <button type="submit">Confirmar Exclusão</button>
         <a href="{% url 'core:listar_tarefas' %}">Cancelar</a>
     </form>
-</body>
-</html>
+{% endblock %}

@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Confirmar Exclusão</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Exclusão{% endblock %}
+
+{% block content %}
     <h1>Excluir Projeto</h1>
     <p>Tem certeza que deseja excluir o projeto "<strong>{{ projeto.nome }}</strong>"?</p>
-
+    
     <form method="POST">
         {% csrf_token %}
         <button type="submit">Confirmar Exclusão</button>
         <a href="{% url 'core:lista_projetos' %}">Cancelar</a>
     </form>
-</body>
-</html>
+{% endblock %}
