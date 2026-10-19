@@ -7,7 +7,9 @@
 <body>
     <h1>Projetos Cadastrados</h1>
 
-    <a href="{% url 'core:criar_projeto' %}">Novo Projeto</a>
+    <a href="{% url 'core:criar_projeto' %}">Novo Projeto</a> |
+    <a href="{% url 'core:listar_tarefas' %}">Ver Tarefas</a>
+
 
     <ul>
         {% for projeto in projetos %}

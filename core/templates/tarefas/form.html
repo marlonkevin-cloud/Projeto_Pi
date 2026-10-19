@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Tarefa</title>
+</head>
+<body>
+    <h1>Gerenciar Tarefa</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+    <a href="{% url 'core:listar_tarefas' %}">Voltar</a>
+</body>
+</html>

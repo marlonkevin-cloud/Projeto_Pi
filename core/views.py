@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Projeto
-from .forms import ProjetoForm
+from .models import Projeto, Tarefa
+from .forms import ProjetoForm, TarefaForm
 
 def lista_projetos(request):
     projetos = Projeto.objects.all()
@@ -33,3 +33,35 @@ def excluir_projeto(request, pk):
         projeto.delete()
         return redirect('core:lista_projetos')
     return render(request, 'projetos/confirmar_exclusao.html', {'projeto': projeto})
+
+def listar_tarefas(request):
+    tarefas = Tarefa.objects.all().select_related('projeto')
+    return render(request, 'tarefas/listar.html', {'tarefas': tarefas})
+
+def criar_tarefa(request):
+    if request.method == 'POST':
+        form = TarefaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('core:listar_tarefas')
+    else:
+        form = TarefaForm()
+    return render(request, 'tarefas/form.html', {'form': form, 'titulo_pagina': 'Criar Tarefa'})
+
+def editar_tarefa(request, pk):
+    tarefa = get_object_or_404(Tarefa, pk=pk)
+    if request.method == 'POST':
+        form = TarefaForm(request.POST, instance=tarefa)
+        if form.is_valid():
+            form.save()
+            return redirect('core:listar_tarefas')
+    else:
+        form = TarefaForm(instance=tarefa)
+    return render(request, 'tarefas/form.html', {'form': form, 'titulo_pagina': 'Editar Tarefa'})
+
+def excluir_tarefa(request, pk):
+    tarefa = get_object_or_404(Tarefa, pk=pk)
+    if request.method == 'POST':
+        tarefa.delete()
+        return redirect('core:listar_tarefas')
+    return render(request, 'tarefas/confirmar_exclusao.html', {'tarefa': tarefa})
