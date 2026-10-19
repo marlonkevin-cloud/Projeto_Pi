@@ -6,13 +6,16 @@
 </head>
 <body>
     <h1>Projetos Cadastrados</h1>
-    <a href="{% url 'criar_projeto' %}">Novo Projeto</a>
-    
+
+    <a href="{% url 'core:criar_projeto' %}">Novo Projeto</a>
+
     <ul>
         {% for projeto in projetos %}
             <li>
                 <strong>{{ projeto.nome }}</strong> - {{ projeto.data_inicio }}<br>
-                {{ projeto.descricao }}
+                {{ projeto.descricao }}<br>
+                <a href="{% url 'core:editar_projeto' projeto.pk %}">Editar</a> | 
+                <a href="{% url 'core:excluir_projeto' projeto.pk %}">Excluir</a>
             </li>
         {% empty %}
             <li>Nenhum projeto cadastrado.</li>
